@@ -3,142 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript-Homework3</title>
+    <title>JavaScript-Homework4</title>
     <script src="./js/task-1.js"></script>
     <script src="./js/task-2.js"></script>
     <script src="./js/task-3.js"></script>
 
+    
+   
     <style>
-       body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        
+        .container {
+            margin-left: 500px;
+            margin-right: 500px;
+        }
 
-    .container {
-        background: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-
-    h1 {
-        color: #333;
-    }
-
-    .task {
-        margin-bottom: 20px;
-    }
-
-    button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-
-    p {
-        margin-top: 10px;
-        font-size: 1.1em;
-        color: #555;
-    }
-
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+        input[type="number"], input[type="text"], button {
+            margin: 5px 0;
+            padding: 5px;
+            font-size: 16px;
+        }
+        select {
+            margin: 5px 0;
+            padding: 5px;
+            width: 100%;
+            font-size: 16px;
+        }
+        button {
+            background-color: #00b4d8;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0077b6;
+        }
+        .result {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    
-  <div class="container">
-          <h1>JavaScript Görevleri</h1>
-          
-          <div class="task">
-              <h2>Görev 1: Ürünlerin Paketlenmesi</h2>
-              <button onclick="checkCapacity()">Paketlenme Durumunu Kontrol Et</button>
-              <p id="task1-result"></p>
-          </div>
-          
-          <div class="task">
-              <h2>Görev 2: Kalori Hesaplama</h2>
-              <button onclick="calculateCalories()">Ortalama Kalorileri Hesapla</button>
-              <p id="task2-result"></p>
-          </div>
-          
-          <div class="task">
-              <h2>Görev 3: Oyuncu Profili</h2>
-              <button onclick="showProfileInfo()">Profil Bilgilerini Göster</button>
-              <p id="task3-result"></p>
-          </div>
-      </div>
-    </div>
-    
-      <script>
-        // Görev 1: Ürünlerin Paketlenmesi
-      function isEnoughCapacity(products, containerSize) {
-          const totalProducts = Object.values(products).reduce((acc, quantity) => acc + quantity, 0);
-          return totalProducts <= containerSize;
-      }
-
-      function checkCapacity() {
-          const result = isEnoughCapacity({ elmalar: 2, üzümler: 3, havuçlar: 1 }, 8); // Örnek 1
-          document.getElementById("task1-result").innerText = result ? "Doğru" : "Yanlış";
-      }
-
-      // Görev 2: Kalori Hesaplama
-      function calcAverageCalories(days) {
-          if (days.length === 0) return 0;
-
-          const totalCalories = days.reduce((acc, day) => acc + day.kalori, 0);
-          return totalCalories / days.length;
-      }
-
-      function calculateCalories() {
-          const averageCalories = calcAverageCalories([
-              { gün: "pazartesi", kalori: 3010 },
-              { gün: "salı", kalori: 3200 },
-              { gün: "çarşamba", kalori: 3120 },
-              { gün: "perşembe", kalori: 2900 },
-              { gün: "cuma", kalori: 3450 },
-              { gün: "cumartesi", kalori: 3280 },
-              { gün: "pazar", kalori: 3300 }
-          ]);
-          document.getElementById("task2-result").innerText = `Ortalama Kalori: ${averageCalories}`;
-      }
-
-      // Görev 3: Oyuncu Profili
-      const profile = {
-          username: "Jacob",
-          playTime: 300,
-
-          changeUsername(newName) {
-              this.username = newName;
-          },
-
-          updatePlayTime(hours) {
-              this.playTime += hours;
-          },
-
-          getInfo() {
-              return `${this.username}'ın ${this.playTime} aktif saati var!`;
-          }
-      };
-
-      function showProfileInfo() {
-          profile.changeUsername("Marco"); // Örnek değişiklik
-          profile.updatePlayTime(20); // Örnek güncelleme
-          document.getElementById("task3-result").innerText = profile.getInfo();
-      }
-
-    </script>
+    <section class="container">
+        <h1>Sağlıklı Yaşam</h1>
+        
+        <h2>Kapasite Kontrolü</h2>
+        <select id="productsOption">
+            <option value='{"elmalar":2, "üzümler":3, "havuçlar":1}'>Seçenek 1: Elmalar: 2, Üzümler: 3, Havuçlar: 1</option>
+            <option value='{"elmalar":4, "üzümler":6, "limon":16}'>Seçenek 2: Elmalar: 4, Üzümler: 6, Limon: 16</option>
+            <option value='{"elmalar":1, "limon":5, "domatesler":3}'>Seçenek 3: Elmalar: 1, Limon: 5, Domatesler: 3</option>
+            <option value='{"elmalar":18, "patatesler":5, "portakallar":2}'>Seçenek 4: Elmalar: 18, Patatesler: 5, Portakallar: 2</option>
+        </select>
+        <input type="number" id="containerSize" placeholder="Konteyner Sayısı" />
+        <br>
+        <button onclick="checkCapacity()">Kontrol Et</button>
+        <div id="task1-result" class="result"></div>
+        
+        <h2>Ortalama Kalori Hesaplama</h2>
+        <select id="daysOption">
+            <option value='[{"gün":"pazartesi","kalori":3010},{"gün":"salı","kalori":3200}]'>Seçenek 1: Pazartesi: 3010, Salı: 3200</option>
+            <option value='[{"gün":"pazartesi","kalori":2040},{"gün":"salı","kalori":2270}]'>Seçenek 2: Pazartesi: 2040, Salı: 2270</option>
+        </select>
+        <button onclick="calculateAverageCalories()">Hesapla</button>
+        <div id="task2-result" class="result"></div>
+        
+        <h2>Profil Güncelle</h2>
+        <input type="text" id="newUsername" placeholder="Yeni Kullanıcı Adı" />
+        <input type="number" id="playTimeToAdd" placeholder="Eklenecek Oyun Saati" />
+        <button onclick="updateProfile()">Güncelle</button>
+        <div id="task3-result" class="result"></div>
+    </section>
 </body>
 </html>
