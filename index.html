@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript-Homework3</title>
+    <script src="./js/task-1.js"></script>
+    <script src="./js/task-2.js"></script>
+    <script src="./js/task-3.js"></script>
+
+    <style>
+       body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    .task {
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    p {
+        margin-top: 10px;
+        font-size: 1.1em;
+        color: #555;
+    }
+
+    </style>
+</head>
+<body>
+    
+  <div class="container">
+          <h1>JavaScript Görevleri</h1>
+          
+          <div class="task">
+              <h2>Görev 1: Ürünlerin Paketlenmesi</h2>
+              <button onclick="checkCapacity()">Paketlenme Durumunu Kontrol Et</button>
+              <p id="task1-result"></p>
+          </div>
+          
+          <div class="task">
+              <h2>Görev 2: Kalori Hesaplama</h2>
+              <button onclick="calculateCalories()">Ortalama Kalorileri Hesapla</button>
+              <p id="task2-result"></p>
+          </div>
+          
+          <div class="task">
+              <h2>Görev 3: Oyuncu Profili</h2>
+              <button onclick="showProfileInfo()">Profil Bilgilerini Göster</button>
+              <p id="task3-result"></p>
+          </div>
+      </div>
+    </div>
+    
+      <script>
+        // Görev 1: Ürünlerin Paketlenmesi
+      function isEnoughCapacity(products, containerSize) {
+          const totalProducts = Object.values(products).reduce((acc, quantity) => acc + quantity, 0);
+          return totalProducts <= containerSize;
+      }
+
+      function checkCapacity() {
+          const result = isEnoughCapacity({ elmalar: 2, üzümler: 3, havuçlar: 1 }, 8); // Örnek 1
+          document.getElementById("task1-result").innerText = result ? "Doğru" : "Yanlış";
+      }
+
+      // Görev 2: Kalori Hesaplama
+      function calcAverageCalories(days) {
+          if (days.length === 0) return 0;
+
+          const totalCalories = days.reduce((acc, day) => acc + day.kalori, 0);
+          return totalCalories / days.length;
+      }
+
+      function calculateCalories() {
+          const averageCalories = calcAverageCalories([
+              { gün: "pazartesi", kalori: 3010 },
+              { gün: "salı", kalori: 3200 },
+              { gün: "çarşamba", kalori: 3120 },
+              { gün: "perşembe", kalori: 2900 },
+              { gün: "cuma", kalori: 3450 },
+              { gün: "cumartesi", kalori: 3280 },
+              { gün: "pazar", kalori: 3300 }
+          ]);
+          document.getElementById("task2-result").innerText = `Ortalama Kalori: ${averageCalories}`;
+      }
+
+      // Görev 3: Oyuncu Profili
+      const profile = {
+          username: "Jacob",
+          playTime: 300,
+
+          changeUsername(newName) {
+              this.username = newName;
+          },
+
+          updatePlayTime(hours) {
+              this.playTime += hours;
+          },
+
+          getInfo() {
+              return `${this.username}'ın ${this.playTime} aktif saati var!`;
+          }
+      };
+
+      function showProfileInfo() {
+          profile.changeUsername("Marco"); // Örnek değişiklik
+          profile.updatePlayTime(20); // Örnek güncelleme
+          document.getElementById("task3-result").innerText = profile.getInfo();
+      }
+
+    </script>
+</body>
+</html>
