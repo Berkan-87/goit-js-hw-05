@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>JavaScript-Homework5</title>
+    <script src="./js/task-1.js"></script>
+    <script src="./js/task-2.js"></script>
+    <script src="./js/task-3.js"></script>
+    <script src="./js/task-4.js"></script>
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+    <div class="max-w-4xl w-full bg-white rounded-2xl shadow-xl p-6">
+        <h1 class="text-2xl font-bold text-gray-700 mb-4">Interactive User App</h1>
+        <br>
+        <div class="space-y-4">
+            <!-- Task 1 -->
+            <button id="task1Btn" class="w-full bg-blue-500 text-white py-2 px-4 rounded-xl hover:bg-blue-600">Get User Names</button>
+            <div id="task1Result" class="bg-gray-100 p-4 rounded-xl text-gray-700"></div>
+
+            <!-- Task 2 -->
+            <button id="task2Btn" class="w-full bg-green-500 text-white py-2 px-4 rounded-xl hover:bg-green-600">Find Users with a Friend</button>
+            <input type="text" id="friendNameInput" placeholder="Enter friend's name" class="w-full p-2 border rounded-xl mb-2">
+            <div id="task2Result" class="bg-gray-100 p-4 rounded-xl text-gray-700"></div>
+
+            <!-- Task 3 -->
+            <button id="task3Btn" class="w-full bg-purple-500 text-white py-2 px-4 rounded-xl hover:bg-purple-600">Sort by Descending Friend Count</button>
+            <div id="task3Result" class="bg-gray-100 p-4 rounded-xl text-gray-700"></div>
+
+            <!-- Task 4 -->
+            <button id="task4Btn" class="w-full bg-yellow-500 text-white py-2 px-4 rounded-xl hover:bg-yellow-600">Get Total Balance by Gender</button>
+            <input type="text" id="genderInput" placeholder="Enter gender (male/female)" class="w-full p-2 border rounded-xl mb-2">
+            <div id="task4Result" class="bg-gray-100 p-4 rounded-xl text-gray-700"></div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code linked to buttons
+        const users = [
+            {
+                name: "Moore Hensley",
+                email: "moorehensley@indexia.com",
+                balance: 2811,
+                friends: ["Sharron Pace"],
+                gender: "male"
+            },
+            {
+                name: "Sharlene Bush",
+                email: "sharlenebush@tubesys.com",
+                balance: 3821,
+                friends: ["Briana Decker", "Sharron Pace"],
+                gender: "female"
+            },
+            {
+                name: "Ross Vazquez",
+                email: "rossvazquez@xinware.com",
+                balance: 3793,
+                friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+                gender: "male"
+            },
+            {
+                name: "Elma Head",
+                email: "elmahead@omatom.com",
+                balance: 2278,
+                friends: ["Goldie Gentry", "Aisha Tran"],
+                gender: "female"
+            },
+            {
+                name: "Carey Barr",
+                email: "careybarr@nurali.com",
+                balance: 3951,
+                friends: ["Jordan Sampson", "Eddie Strong"],
+                gender: "male"
+            },
+            {
+                name: "Blackburn Dotson",
+                email: "blackburndotson@furnigeer.com",
+                balance: 1498,
+                friends: ["Jacklyn Lucas", "Linda Chapman"],
+                gender: "male"
+            },
+            {
+                name: "Sheree Anthony",
+                email: "shereeanthony@kog.com",
+                balance: 2764,
+                friends: ["Goldie Gentry", "Briana Decker"],
+                gender: "female"
+            }
+        ];
+
+        document.getElementById("task1Btn").addEventListener("click", () => {
+            const result = users.map(user => user.name);
+            document.getElementById("task1Result").innerText = `User Names: ${result.join(", ")}`;
+        });
+
+        document.getElementById("task2Btn").addEventListener("click", () => {
+            const friendName = document.getElementById("friendNameInput").value.trim();
+            if (!friendName) {
+                document.getElementById("task2Result").innerText = "Please enter a valid friend's name.";
+                return;
+            }
+            const filteredUsers = users.filter(user => user.friends.includes(friendName));
+            if (filteredUsers.length === 0) {
+                document.getElementById("task2Result").innerText = `No users found with friend: ${friendName}`;
+            } else {
+                const userList = filteredUsers.map(user => `- ${user.name}`).join("\n");
+                document.getElementById("task2Result").innerText = `Users with friend '${friendName}':\n${userList}`;
+            }
+        });
+
+        document.getElementById("task3Btn").addEventListener("click", () => {
+            const sortedUsers = users.slice().sort((a, b) => b.friends.length - a.friends.length);
+            const userList = sortedUsers.map(user => `- ${user.name} (${user.friends.length} friends)`).join("\n");
+            document.getElementById("task3Result").innerText = `Users sorted by friend count:\n${userList}`;
+        });
+
+        document.getElementById("task4Btn").addEventListener("click", () => {
+            const gender = document.getElementById("genderInput").value.trim().toLowerCase();
+            if (!["male", "female"].includes(gender)) {
+                document.getElementById("task4Result").innerText = "Please enter 'male' or 'female'.";
+                return;
+            }
+            const totalBalance = users
+                .filter(user => user.gender === gender)
+                .reduce((total, user) => total + user.balance, 0);
+            document.getElementById("task4Result").innerText = `Total balance for ${gender}: $${totalBalance}`;
+        });
+        
+    </script>
+</body>
+</html>
